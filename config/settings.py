@@ -143,7 +143,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.yandex.YandexOAuth2'
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH2_SECRET')
+
+SOCIAL_AUTH_YANDEX_OAUTH2_KEY = os.getenv('YANDEX_OAUTH2_KEY')
+SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = os.getenv('YANDEX_OAUTH2_SECRET')
