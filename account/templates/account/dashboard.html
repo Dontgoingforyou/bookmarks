@@ -4,9 +4,18 @@
 
 {% block content %}
   <h1>Главная</h1>
+  {% with total_images_created=request.user.images_created_count %}
   <p>
     Добро пожаловать на главную.
-    Вы можете <a href="{% url 'edit' %}">редактировать свой профиль</a> или
+    Вы добавили закладку {{ total_images_created }} изображение {{ total_images_created|pluralize }}
+  {% endwith %}
+  </p>
+  <p>
+    Перетащите следующую кнопку на панель инструментов закладок, чтобы добавить в закладки изображения с других веб-сайтов ->
+    <a href="javascript:{% include 'bookmarklet_launcher.js' %}" class="button">Перетащить в закладки</a>
+  </p>
+  <p>
+    Вы также можете <a href="{% url 'edit' %}">редактировать свой профиль</a> или
     <a href="{% url 'password_change' %}">изменить пароль</a>
   </p>
 {% endblock %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'images.apps.ImagesConfig',
 
     'social_django',
     'django_extensions',
@@ -164,3 +165,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH2_SECRET')
 
 SOCIAL_AUTH_YANDEX_OAUTH2_KEY = os.getenv('YANDEX_OAUTH2_KEY')
 SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = os.getenv('YANDEX_OAUTH2_SECRET')
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type('application/javascript', '.js', True)
+    mimetypes.add_type('text/css', '.css', True)
