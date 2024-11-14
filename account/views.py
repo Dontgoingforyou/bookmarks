@@ -1,3 +1,5 @@
+import redis
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
@@ -8,8 +10,15 @@ from account.forms import LoginForm, UserRegistrationForm, UserEditForm, Profile
 from account.models import Profile, Contact
 from actions.utils import create_action
 from actions.models import Action
+from images.models import Image
 
 User = get_user_model()
+
+r = redis.Redis(
+    host=settings.REDIS_HOST,
+    port=settings.REDIS_PORT,
+    db=settings.REDIS_DB
+)
 
 
 def user_login(request):
@@ -74,8 +83,18 @@ def dashboard(request):
         actions = actions.filter(user_id__in=following_ids)
     actions = actions.select_related('user', 'user__profile').prefetch_related('target')[:10]
 
-    return render(request, 'account/dashboard.html', {'section': 'dashboard', 'actions': actions})
+    # получение словаря рейтинга изображении
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
+    image_ranking_ids = [int(id) for id in image_ranking]
+    # получение наиболее просматриваемых изображении
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
 
+    return render(request, 'account/dashboard.html', {
+        'section': 'dashboard',
+        'actions': actions,
+        'most_viewed': most_viewed
+    })
 
 @login_required
 def edit(request):
