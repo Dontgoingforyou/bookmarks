@@ -1,0 +1,9 @@
+.git
+.cursor
+.vscode
+env
+.env
+**/__pycache__
+**/*.py[cod]
+db.sqlite3
+bookmarks/media
