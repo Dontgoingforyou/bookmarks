@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<main class="auth">
+    <section class="auth-card">
+        <h1>Вход</h1>
+        {% if form.errors %}
+            <p class="auth-error">Неверное имя пользователя или пароль. Пожалуйста, попробуйте еще раз.</p>
+        {% else %}
+            <p class="auth-lead">Пожалуйста, используйте следующую форму для входа:</p>
+        {% endif %}
+        <form class="auth-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <p>
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </p>
+            <p>
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </p>
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit">Вход</button>
+        </form>
+        <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+        <p><a class="auth-link" href="{% url 'register' %}">Зарегистрироваться</a></p>
+    </section>
+</main>
+{% endblock %}

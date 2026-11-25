@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Панель управления{% endblock %}
+{% block content %}
+<main class="page">
+    <h1>Панель управления</h1>
+    <p>Добро пожаловать, {{ user.username }}.</p>
+    <p>Вы можете <a href="{% url 'edit' %}">редактировать ваш аккаунт</a> или <a href="{% url 'password_change' %}">сменить пароль</a>.</p>
+</main>
+{% endblock %}

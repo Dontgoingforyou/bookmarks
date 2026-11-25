@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<main class="auth">
+    <section class="auth-card">
+        <h1>Регистрация</h1>
+        <p class="auth-lead">Пожалуйста, используйте форму ниже для регистрации:</p>
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

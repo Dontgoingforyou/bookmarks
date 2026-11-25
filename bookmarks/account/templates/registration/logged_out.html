@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Выход{% endblock %}
+{% block content %}
+<main class="auth">
+    <section class="auth-card">
+        <h1>Выход</h1>
+        <p class="auth-lead">Вы успешно вышли из системы.</p>
+        <p class="auth-lead"><a href="{% url 'login' %}">Войти снова</a></p>
+    </section>
+</main>
+{% endblock %}
