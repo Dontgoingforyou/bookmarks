@@ -22,18 +22,33 @@
                 </li>
             </ul>
         {% endif %}
-        <span class="user">
-            {% if request.user.is_authenticated %}
-                Добро пожаловать, {{ request.user.first_name|default:request.user.username }}!
-                <form class="logout-form" method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Выход</button>
-                </form>
-            {% else %}
-                <a href="{% url 'login' %}">Вход</a>
+        <div class="user-wrap">
+            <span class="user">
+                {% if request.user.is_authenticated %}
+                    Добро пожаловать, {{ request.user.first_name|default:request.user.username }}!
+                    <form class="logout-form" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Выход</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Вход</a>
+                {% endif %}
+            </span>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            <span>{{ message }}</span>
+                            <button type="button" class="close" aria-label="Закрыть">×</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <script src="{% static 'js/messages.js' %}" defer></script>
             {% endif %}
-        </span>
+        </div>
     </header>
-    {% block content %}{% endblock %}
+
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
