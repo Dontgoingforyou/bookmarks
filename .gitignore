@@ -4,3 +4,5 @@ __pycache__/
 *.py[cod]
 db.sqlite3
 bookmarks/media/
+bookmarks/cert.crt
+bookmarks/cert.key
