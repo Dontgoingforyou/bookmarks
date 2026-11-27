@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-python bookmarks/manage.py migrate --noinput
-
 if ! openssl x509 -in bookmarks/cert.crt -noout -ext subjectAltName 2>/dev/null | grep -q 'bookmarks.test'; then
     openssl req -x509 -newkey rsa:2048 -nodes \
         -keyout bookmarks/cert.key \
