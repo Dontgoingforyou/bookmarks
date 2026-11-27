@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить изображение{% endblock %}
+
+{% block content %}
+<main class="page">
+    <section class="auth-card">
+        <h1>Добавить изображение</h1>
+        <p class="auth-lead">Укажите заголовок, ссылку и описание.</p>
+        {% if form.url.value %}
+            <img class="image-preview" src="{{ form.url.value }}" alt="{{ form.title.value }}">
+        {% endif %}
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Добавить</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

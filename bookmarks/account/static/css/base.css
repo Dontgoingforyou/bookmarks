@@ -186,8 +186,10 @@ a:hover {
 .auth-form input[type="text"],
 .auth-form input[type="password"],
 .auth-form input[type="email"],
+.auth-form input[type="url"],
 .auth-form input[type="date"],
-.auth-form input[type="file"] {
+.auth-form input[type="file"],
+.auth-form textarea {
     width: 100%;
     padding: 0.7rem 0.85rem;
     border: 1px solid var(--line);
@@ -195,6 +197,30 @@ a:hover {
     background: var(--field);
     color: var(--ink);
     font: inherit;
+}
+
+.auth-form textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.image-preview,
+.image-detail {
+    display: block;
+    width: 100%;
+    margin: 0 0 1.15rem;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: var(--field);
+}
+
+.image-preview {
+    max-height: 18rem;
+    object-fit: cover;
+}
+
+.image-detail {
+    height: auto;
 }
 
 .auth-form input[type="file"] {
@@ -207,7 +233,8 @@ a:hover {
     accent-color: var(--accent);
 }
 
-.auth-form input:focus {
+.auth-form input:focus,
+.auth-form textarea:focus {
     outline: 3px solid rgba(47, 111, 237, 0.25);
     border-color: var(--accent);
     background: #fff;

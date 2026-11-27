@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ image.title }}{% endblock %}
+
+{% block content %}
+<main class="page">
+    <section class="auth-card">
+        <h1>{{ image.title }}</h1>
+        {% if image.description %}
+            <p class="auth-lead">{{ image.description }}</p>
+        {% endif %}
+        <img class="image-detail" src="{{ image.image.url }}" alt="{{ image.title }}">
+        <p class="auth-extra"><a href="{{ image.url }}">Источник</a></p>
+    </section>
+</main>
+{% endblock %}
