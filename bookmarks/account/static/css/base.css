@@ -134,6 +134,57 @@ a:hover {
     width: 100%;
 }
 
+.dashboard p {
+    margin: 0 0 0.85rem;
+}
+
+.dashboard p:last-child {
+    margin-bottom: 0;
+}
+
+.bookmarklet {
+    display: inline-block;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+}
+
+.bookmarklet:hover {
+    background: var(--accent-dark);
+    color: #fff;
+}
+
+.dashboard-links {
+    color: var(--muted);
+}
+
+.bookmarklet-help {
+    margin: 0 0 0.85rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.bookmarklet-help summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.bookmarklet-help summary:hover {
+    color: var(--accent-dark);
+}
+
+.bookmarklet-help ul {
+    margin: 0.55rem 0 0;
+    padding-left: 1.1rem;
+}
+
+.bookmarklet-help li + li {
+    margin-top: 0.35rem;
+}
+
 .auth {
     display: grid;
     min-height: calc(100vh - 4.5rem);

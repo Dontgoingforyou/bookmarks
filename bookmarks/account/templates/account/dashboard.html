@@ -1,9 +1,33 @@
 {% extends "base.html" %}
+{% load russian_pluralize %}
 {% block title %}Панель управления{% endblock %}
 {% block content %}
 <main class="page">
-    <h1>Панель управления</h1>
-    <p>Добро пожаловать, {{ user.username }}.</p>
-    <p>Вы можете <a href="{% url 'edit' %}">редактировать ваш аккаунт</a> или <a href="{% url 'password_change' %}">сменить пароль</a>.</p>
+    <section class="auth-card dashboard">
+        <h1>Панель управления</h1>
+        {% with total_images_created=request.user.images_created.count %}
+            <p class="auth-lead">Добро пожаловать, {{ user.username }}.</p>
+            <p>
+                Вы добавили {{ total_images_created }}
+                изображени{{ total_images_created|russian_pluralize:"е,я,й" }}.
+            </p>
+        {% endwith %}
+        <p>Перетащите ссылку на панель инструментов:</p>
+        <p>
+            <a href="javascript:(function(){if(window.bookmarkletLaunch){bookmarkletLaunch();}else{document.body.appendChild(document.createElement('script')).src='https://localhost:8000/static/js/bookmarklet.js?r='+Math.floor(Math.random()*9999999999999999);}})();" class="bookmarklet">Добавить закладку</a>
+        </p>
+        <details class="bookmarklet-help">
+            <summary>Если панели закладок не видно</summary>
+            <ul>
+                <li>Chrome, Edge, Яндекс, Opera и Brave: Ctrl+Shift+B. На Mac — Cmd+Shift+B.</li>
+                <li>Firefox: правый клик по панели адреса, затем «Панель закладок» и «Всегда показывать».</li>
+                <li>Safari: «Вид», затем «Показать панель избранного», или Cmd+Shift+B.</li>
+            </ul>
+        </details>
+        <p class="dashboard-links">
+            Вы можете <a href="{% url 'edit' %}">редактировать ваш аккаунт</a>
+            или <a href="{% url 'password_change' %}">сменить пароль</a>.
+        </p>
+    </section>
 </main>
 {% endblock %}

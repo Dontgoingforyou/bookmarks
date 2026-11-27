@@ -14,10 +14,14 @@ class ImageCreateForm(forms.ModelForm):
             'url': forms.URLInput(attrs={'placeholder': 'URL изображения'}),
         }
 
+    def image_extension(self, url):
+        path = url.split('?')[0].split('#')[0]
+        return path.rsplit('.', 1)[-1].lower()
+
     def clean_url(self):
         url = self.cleaned_data['url']
         valid_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']
-        extension = url.split('.')[-1].lower()
+        extension = self.image_extension(url)
         if extension not in valid_extensions:
             raise forms.ValidationError(
                 'Неверное расширение файла. Разрешены только JPG, JPEG, PNG, GIF, BMP, WEBP.',
@@ -44,7 +48,7 @@ class ImageCreateForm(forms.ModelForm):
         image = super().save(commit=False)
         image_url = self.cleaned_data['url']
         name = slugify(image.title) or 'image'
-        extension = image_url.split('.')[-1].lower()
+        extension = self.image_extension(image_url)
         image_name = f'{name}.{extension}'
         content = getattr(self, 'downloaded_image', None) or self.download_image(image_url)
         image.image.save(image_name, ContentFile(content), save=False)

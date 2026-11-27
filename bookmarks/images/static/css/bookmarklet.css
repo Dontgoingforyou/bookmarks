@@ -1,0 +1,82 @@
+@font-face {
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("../fonts/manrope-cyrillic.woff2") format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+    font-family: Manrope;
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("../fonts/manrope-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+div.bookmarklet {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2147483646;
+    box-sizing: border-box;
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 1rem 1rem 0.9rem;
+    overflow: auto;
+    border: 1px solid #d5e0ee;
+    border-radius: 1.25rem;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(23, 32, 51, 0.18);
+    color: #172033;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+div.bookmarklet #close {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.8rem;
+    color: #5c6b82;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+}
+
+div.bookmarklet #close:hover {
+    color: #172033;
+}
+
+div.bookmarklet h2 {
+    margin: 0 1.5rem 0.85rem 0;
+    color: #172033;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+div.bookmarklet .images {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+}
+
+div.bookmarklet .images img {
+    display: block;
+    width: 100%;
+    height: 6.5rem;
+    object-fit: cover;
+    border: 1px solid #d5e0ee;
+    border-radius: 0.75rem;
+    background: #f7faff;
+    cursor: pointer;
+}
+
+div.bookmarklet .images img:hover {
+    border-color: #2f6fed;
+}
