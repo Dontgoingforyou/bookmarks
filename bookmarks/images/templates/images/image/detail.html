@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load russian_pluralize %}
-{% load thumbnail %}
+{% load static russian_pluralize thumbnail %}
 
 {% block title %}{{ image.title }}{% endblock %}
 
@@ -14,18 +13,32 @@
         <a href="{{ image.image.url }}">
             <img class="image-detail" src="{% thumbnail image.image 300x0 %}" alt="{{ image.title }}">
         </a>
-        {% with total_likes=image.users_like.count %}
+        {% with total_likes=image.users_like.count user_likes=image.users_like.all %}
             <div class="image-likes">
                 <p class="image-likes-count">
                     <span class="count">
                         <span class="total">{{ total_likes }}</span>
-                        лайк{{ total_likes|russian_pluralize:",а,ов" }}
+                        <span class="likes-label">лайк{{ total_likes|russian_pluralize:",а,ов" }}</span>
                     </span>
                 </p>
+                <a href="#"
+                   class="image-like-button"
+                   data-url="{% url 'images:like' %}"
+                   data-id="{{ image.id }}"
+                   data-user-id="{{ request.user.id }}"
+                   data-name="{{ request.user.get_full_name|default:request.user.username }}"
+                   data-photo="{% if request.user.is_authenticated and request.user.profile.photo %}{{ request.user.profile.photo.url }}{% endif %}"
+                   data-action="{% if request.user in user_likes %}un{% endif %}like">
+                    {% if request.user in user_likes %}
+                        Убрать лайк
+                    {% else %}
+                        Поставить лайк
+                    {% endif %}
+                </a>
                 <div class="image-likes-list">
-                    {% for user in image.users_like.all %}
+                    {% for user in user_likes %}
                         {% with name=user.get_full_name|default:user.username %}
-                            <div class="image-like">
+                            <div class="image-like" data-user-id="{{ user.id }}">
                                 {% if user.profile.photo %}
                                     <img src="{{ user.profile.photo.url }}" alt="">
                                 {% else %}
@@ -43,4 +56,8 @@
         <p class="auth-extra"><a href="{{ image.url }}">Источник</a></p>
     </section>
 </main>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/image-like.js' %}" defer></script>
 {% endblock %}

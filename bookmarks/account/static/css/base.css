@@ -130,6 +130,54 @@ a:hover {
     letter-spacing: -0.04em;
 }
 
+.page-images {
+    width: min(64rem, calc(100% - 2.5rem));
+}
+
+.page-images h1 {
+    margin-bottom: 1.15rem;
+}
+
+.image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+
+.image-card {
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    box-shadow: 0 18px 50px rgba(23, 32, 51, 0.08);
+}
+
+.image-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--field);
+}
+
+.image-card .info {
+    padding: 0.75rem 0.9rem 0.9rem;
+}
+
+.image-card .info a {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.image-card .info a:hover {
+    color: var(--accent);
+}
+
+.image-list-empty {
+    margin: 0;
+    color: var(--muted);
+}
+
 .page .auth-card {
     width: 100%;
 }
@@ -290,6 +338,21 @@ a:hover {
 
 .image-likes-count {
     margin: 0 0 0.85rem;
+}
+
+.image-like-button {
+    display: inline-block;
+    margin: 0 0 0.85rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+}
+
+.image-like-button:hover {
+    background: var(--accent-dark);
+    color: #fff;
 }
 
 .count {
