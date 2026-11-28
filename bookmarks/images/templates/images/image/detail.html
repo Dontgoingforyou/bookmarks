@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load russian_pluralize %}
+{% load thumbnail %}
 
 {% block title %}{{ image.title }}{% endblock %}
 
@@ -7,9 +9,37 @@
     <section class="auth-card">
         <h1>{{ image.title }}</h1>
         {% if image.description %}
-            <p class="auth-lead">{{ image.description }}</p>
+            <div class="auth-lead">{{ image.description|linebreaks }}</div>
         {% endif %}
-        <img class="image-detail" src="{{ image.image.url }}" alt="{{ image.title }}">
+        <a href="{{ image.image.url }}">
+            <img class="image-detail" src="{% thumbnail image.image 300x0 %}" alt="{{ image.title }}">
+        </a>
+        {% with total_likes=image.users_like.count %}
+            <div class="image-likes">
+                <p class="image-likes-count">
+                    <span class="count">
+                        <span class="total">{{ total_likes }}</span>
+                        лайк{{ total_likes|russian_pluralize:",а,ов" }}
+                    </span>
+                </p>
+                <div class="image-likes-list">
+                    {% for user in image.users_like.all %}
+                        {% with name=user.get_full_name|default:user.username %}
+                            <div class="image-like">
+                                {% if user.profile.photo %}
+                                    <img src="{{ user.profile.photo.url }}" alt="">
+                                {% else %}
+                                    <span class="image-like-fallback" aria-hidden="true">{{ name|first|upper }}</span>
+                                {% endif %}
+                                <p>{{ name }}</p>
+                            </div>
+                        {% endwith %}
+                    {% empty %}
+                        <p class="image-likes-empty">Пока никто не отметил</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endwith %}
         <p class="auth-extra"><a href="{{ image.url }}">Источник</a></p>
     </section>
 </main>
